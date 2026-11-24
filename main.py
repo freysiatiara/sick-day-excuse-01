@@ -22,6 +22,8 @@ def main() -> None:
         raise SystemExit("entry must not be only whitespace")
     if "\n" in EXCUSE or "\r" in EXCUSE:
         raise SystemExit("entry must be a single line")
+    if any((ord(c) < 32 and c != "\t") or ord(c) == 127 for c in EXCUSE):
+        raise SystemExit("entry must not contain control characters")
 
     parent = os.path.dirname(OUTPUT_PATH)
     if parent:
